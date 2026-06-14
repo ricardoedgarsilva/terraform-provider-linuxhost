@@ -1,0 +1,19 @@
+.cache/
+dist/
+
+# Go build and test output
+*.test
+coverage.out
+terraform-provider-linuxhost
+terraform-provider-linuxhost_*
+
+# Terraform local runtime files
+.terraform/
+*.tfstate
+*.tfstate.*
+crash.log
+crash.*.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
