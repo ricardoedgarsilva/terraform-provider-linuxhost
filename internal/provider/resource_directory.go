@@ -93,8 +93,12 @@ func (r *directoryResource) Create(ctx context.Context, req resource.CreateReque
 	path := data.Path.ValueString()
 	mode := data.Mode.ValueString()
 
-	if _, err := r.ssh.run(fmt.Sprintf("mkdir -p %q && chmod %s %q", path, mode, path)); err != nil {
+	if _, err := r.ssh.run(fmt.Sprintf("mkdir -p %q", path)); err != nil {
 		resp.Diagnostics.AddError("Failed to create directory", err.Error())
+		return
+	}
+	if _, err := r.ssh.run(fmt.Sprintf("chmod %s %q", mode, path)); err != nil {
+		resp.Diagnostics.AddError("Failed to chmod directory", err.Error())
 		return
 	}
 
